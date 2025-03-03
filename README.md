@@ -1,147 +1,158 @@
 # SVG-Generator
 
-Generate SVG graphics from text descriptions with both template-based and AI-powered approaches.
+A Jupyter Notebook for generating SVG graphics from text descriptions using both template-based and AI-powered approaches. Perfect for exploring SVG generation and participating in the "Drawing with LLMs" Kaggle competition.
 
-## 🌟 Features
+## 🌟 Overview
 
-- **Template Engine:** Generate common shapes and objects with simple text commands
-- **LLM Integration:** Create complex, custom vector graphics using AI (optional)
-- **Color Recognition:** Automatically detects and applies colors mentioned in prompts
-- **Local Processing:** Works completely offline, no API keys needed
-- **Interactive Mode:** Generate SVGs on-demand with live text prompts
-- **Flexible Output:** Save SVGs to files or integrate with other applications
+This notebook provides an interactive environment for creating vector graphics from simple text prompts. Choose between a lightweight template-based approach or harness the power of language models for more complex imagery.
+
+Originally inspired by the Kaggle "Drawing with LLMs" competition, which challenges participants to build models that generate SVG images from text descriptions, this notebook offers a starting point for those participating in the competition or anyone interested in text-to-SVG generation.
 
 ## 📋 Requirements
 
-### Basic Version (Template-Based)
-- Python 3.8 or higher
-- No special hardware required
+### For running locally:
+- Python 3.8+
+- Jupyter Notebook or JupyterLab
+- For AI version: NVIDIA GPU with 8GB+ VRAM (recommended)
 
-### Advanced Version (AI-Powered)
-- Python 3.8 or higher
-- For Gemma 2-9B: NVIDIA GPU with 16GB+ VRAM recommended
-- For Phi-2: NVIDIA GPU with 8GB+ VRAM recommended
-- CPU-only operation possible but significantly slower
+### For running on Google Colab:
+- Google account
+- For AI version: GPU runtime enabled (Settings → Hardware accelerator → GPU)
 
-## 🚀 Installation
+### For Kaggle Competition:
+- Kaggle account
+- Familiarity with Kaggle Packages (for competition submission)
+
+## 🚀 Getting Started
+
+### Option 1: Running locally
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/vedant713/svg-generator.git
+   git clone https://github.com/yourusername/svg-generator.git
    cd svg-generator
    ```
 
-2. **Create a virtual environment**
+2. **Set up environment**
    ```bash
+   # Create and activate a virtual environment
    python -m venv venv
-   # On Windows
-   venv\Scripts\activate
-   # On macOS/Linux
-   source venv/bin/activate
-   ```
-
-3. **Install dependencies**
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    
-   For template-based version (lightweight):
-   ```bash
-   pip install -r requirements-basic.txt
-   ```
+   # Install Jupyter and dependencies
+   pip install jupyter
+   pip install ipython
    
-   For AI-powered version:
-   ```bash
-   pip install -r requirements-advanced.txt
+   # For AI version, also run:
+   pip install torch transformers huggingface_hub
    ```
 
-4. **Setup for AI version only**
+3. **Launch Jupyter**
+   ```bash
+   jupyter notebook
+   ```
+
+4. **Open the notebook**
+   - Navigate to `SVG-Generator.ipynb` in Jupyter's file browser
+
+### Option 2: Running on Google Colab
+
+1. Open this link: [SVG-Generator on Colab](https://colab.research.google.com/github/yourusername/svg-generator/blob/main/SVG-Generator.ipynb)
+2. For AI model: Enable GPU (Runtime → Change runtime type → Hardware accelerator → GPU)
+3. Run the cells in order
+
+### Option 3: Running on Kaggle
+
+1. Go to the [Drawing with LLMs competition](https://www.kaggle.com/competitions/drawing-with-llms)
+2. Fork this notebook to your Kaggle account
+3. Run all cells to explore the model
+4. Follow competition submission guidelines when ready
+
+## 📒 Notebook Structure
+
+The notebook is organized into these main sections:
+
+1. **Setup** - Install dependencies and import libraries
+2. **Template-Based Generation** - Simple approach using predefined templates
+3. **AI-Powered Generation** - Advanced approach using language models
+4. **Interactive Demo** - UI elements for creating SVGs with your own prompts
+5. **Examples** - Showcase of generated SVGs
+6. **SVG Editing** - Optional tools for modifying generated SVGs
+7. **Export Tools** - Functions for saving SVGs to files
+8. **Kaggle Competition** - Special section for competition participants with guidance on submission format
+
+## 🎮 Usage Instructions
+
+### Running the notebook
+
+1. Execute each cell in order by clicking the ▶️ button or pressing Shift+Enter
+2. Wait for the setup cells to complete before proceeding
+3. For the AI version, you may need to authenticate with Hugging Face when prompted
+
+### Generating SVGs
+
+The notebook provides two interactive methods:
+
+1. **Using Code Cells**:
+   ```python
+   # Template-based generation
+   generator = SVGGenerator()
+   svg_code = generator.predict("a red circle")
+   display(SVG(svg_code))
    
-   If using the AI-powered version, you'll need to log in to Hugging Face:
-   ```bash
-   huggingface-cli login
-   ```
-   Then follow the prompts to enter your Hugging Face token.
-
-## 🎮 Usage
-
-### Command Line
-
-1. **Template-Based Generation**
-   ```bash
-   python svg_generator.py "a red circle"
+   # AI-powered generation (if enabled)
+   llm_generator = SVGGeneratorLLM(use_small_model=True)
+   svg_code = llm_generator.predict("a mountain landscape")
+   display(SVG(svg_code))
    ```
 
-2. **AI-Powered Generation**
-   ```bash
-   python svg_generator_llm.py "a landscape with mountains and a sun"
-   ```
+2. **Using Interactive Widgets** (in the demo section):
+   - Type your prompt in the text input
+   - Select generation method (template or AI)
+   - Click "Generate SVG" button
+   - View and download the result
 
-3. **Interactive Mode**
-   ```bash
-   python svg_generator.py --interactive
-   ```
+### Kaggle Competition Integration
 
-### Python API
+The notebook includes features specifically for the "Drawing with LLMs" competition:
+- SVG validation against competition constraints
+- Proper formatting for competition submission
+- Example prompts similar to competition test cases
+- Performance optimization options to meet competition requirements
 
-```python
-# Template-based
-from svg_generator import SVGGenerator
+## 🖼️ Example Prompts
 
-generator = SVGGenerator()
-svg_code = generator.predict("a blue square")
-generator.save_svg("a blue square", output_folder="my_svgs")
+Try these example prompts in the notebook:
 
-# AI-powered
-from svg_generator_llm import SVGGeneratorLLM
+### Template-based:
+- "a red circle"
+- "a blue square"
+- "a green triangle"
+- "a yellow star"
+- "a purple heart"
 
-# Use small_model=True for Phi-2, False for Gemma 2-9B
-llm_generator = SVGGeneratorLLM(use_small_model=True)
-svg_code = llm_generator.predict("a cartoon robot")
-llm_generator.save_svg("a cartoon robot", output_folder="my_llm_svgs")
-```
+### AI-powered:
+- "a mountain landscape with a lake and sun"
+- "a cartoon face with a happy expression"
+- "a simple house with a tree next to it"
+- "a flower with six petals and a yellow center"
 
-## 🖼️ Examples
+## 💾 Saving Your Work
 
-Here are some examples of SVGs you can generate:
+There are three ways to save generated SVGs:
 
-1. **Basic Shapes**
-   - "a red circle"
-   - "a blue square"
-   - "a green triangle"
-   - "a yellow star"
+1. **Within the notebook**: Generated SVGs are saved to variables
+2. **Download directly**: Use the download buttons in the interactive demo
+3. **Export to files**: Run the export cells to save SVGs to your local machine
 
-2. **Complex Descriptions** (AI version)
-   - "a mountain landscape with a lake and sun"
-   - "a cartoon face with a happy expression"
-   - "a simple house with a tree next to it"
-   - "a flower with six petals and a yellow center"
+## 🔄 Modifying the Notebook
 
-## 🔧 Customization
+Feel free to modify the notebook to suit your needs:
 
-### Adding New Templates
-
-You can add your own templates by modifying the `_load_templates` method in `SVGGenerator` class:
-
-```python
-def _load_templates(self) -> Dict[str, str]:
-    return {
-        "your_template_name": """
-            <your SVG code here with {placeholders} for dynamic content>
-        """,
-        # Add more templates...
-    }
-```
-
-### Customizing LLM Settings
-
-For the AI-powered version, you can adjust generation parameters:
-
-```python
-outputs = self.model.generate(
-    **inputs,
-    max_new_tokens=1500,  # Adjust token length
-    temperature=0.7,      # Adjust creativity (0.0-1.0)
-    do_sample=True
-)
-```
+- Add new templates for additional shapes
+- Adjust model parameters for different generation styles
+- Create new cells for your own experiments
+- Integrate with other visualization tools
 
 ## 🛡️ License
 
@@ -149,10 +160,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙋 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request with improvements or bug fixes.
