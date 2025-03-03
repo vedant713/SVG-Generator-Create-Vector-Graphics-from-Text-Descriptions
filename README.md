@@ -29,8 +29,8 @@ Originally inspired by the Kaggle "Drawing with LLMs" competition, which challen
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/svg-generator.git
-   cd svg-generator
+   git clone https://github.com/vedant713/SVG-Generator-Create-Vector-Graphics-from-Text-Descriptions.git
+   cd SVG-Generator-Create-Vector-Graphics-from-Text-Descriptions
    ```
 
 2. **Set up environment**
